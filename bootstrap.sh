@@ -18,7 +18,6 @@ printHelp() {
     echo "options:"
     echo "-h : this help"
     echo "-d : bypass docker image download"
-    echo "-s : bypass fabric-samples repo clone"
     echo "-b : bypass download of platform-specific binaries"
     echo
     echo "e.g. bootstrap.sh 2.2.0 1.4.8 -s"
@@ -44,24 +43,6 @@ dockerPull() {
         docker tag "hyperledger/fabric-$image_name:$three_digit_image_tag" "hyperledger/fabric-$image_name:$two_digit_image_tag"
         shift
     done
-}
-
-cloneSamplesRepo() {
-    # clone (if needed) hyperledger/fabric-samples and checkout corresponding
-    # version to the binaries and docker images to be downloaded
-    if [ -d first-network ]; then
-        # if we are in the fabric-samples repo, checkout corresponding version
-        echo "===> Checking out v${VERSION} of hyperledger/fabric-samples"
-        git checkout v${VERSION}
-    elif [ -d fabric-samples ]; then
-        # if fabric-samples repo already cloned and in current directory,
-        # cd fabric-samples and checkout corresponding version
-        echo "===> Checking out v${VERSION} of hyperledger/fabric-samples"
-        cd fabric-samples && git checkout v${VERSION}
-    else
-        echo "===> Cloning hyperledger/fabric-samples repo and checkout v${VERSION}"
-        git clone -b master https://github.com/hyperledger/fabric-samples.git && cd fabric-samples && git checkout v${VERSION}
-    fi
 }
 
 # This will download the .tar.gz
@@ -125,7 +106,6 @@ pullDockerImages() {
 }
 
 DOCKER=true
-SAMPLES=true
 BINARIES=true
 
 # Parse commandline args pull out
@@ -164,19 +144,11 @@ while getopts "h?dsb" opt; do
             ;;
         d)  DOCKER=false
             ;;
-        s)  SAMPLES=false
-            ;;
         b)  BINARIES=false
             ;;
     esac
 done
 
-if [ "$SAMPLES" == "true" ]; then
-    echo
-    echo "Clone hyperledger/fabric-samples repo"
-    echo
-    cloneSamplesRepo
-fi
 if [ "$BINARIES" == "true" ]; then
     echo
     echo "Pull Hyperledger Fabric binaries"
