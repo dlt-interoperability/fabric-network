@@ -13,15 +13,17 @@ External Builders and Launchers is an advanced feature that typically requires c
 Open the `config/core.yaml` file at the top of the `fabric-samples` hierarchy. Note that this file comes along with the Fabric binaries, so if you don't have it, follow the [Install the Samples, Binaries and Docker Images](https://hyperledger-fabric.readthedocs.io/en/latest/install.html) instructions in the Hyperledger Fabric documentation to download the binaries and config files.
 
 Modify the field `externalBuilders` as the following:
+
 ```
 externalBuilders:
     - path: /opt/gopath/src/github.com/hyperledger/fabric-samples/asset-transfer-basic/chaincode-external/sampleBuilder
       name: external-sample-builder
 ```
+
 This configuration sets the name of the external builder as `external-sample-builder`, and the path of the builder to the scripts provided in this sample. Note that this is the path within the peer container, not your local machine.
 
 To set the path within the peer container, you will need to modify the container compose file to mount a couple of additional volumes.
-Open the file `test-network/docker/docker-compose-test-net.yaml`, and add to the `volumes` section of both `peer0.org1.example.com` and `peer0.org2.example.com` the following two lines:
+Open the file `network/docker/docker-compose-test-net.yaml`, and add to the `volumes` section of both `peer0.org1.example.com` and `peer0.org2.example.com` the following two lines:
 
 ```
         - ../..:/opt/gopath/src/github.com/hyperledger/fabric-samples
@@ -109,7 +111,6 @@ setGlobals 1
 ```
 
 Edit the `chaincode.env` file in the `fabric-samples/asset-transfer-basic/chaincode-external` directory as necessary to set the `CHAINCODE_ID` variable to the chaincode package-id obtained above.
-
 
 ## Running the Asset-Transfer-Basic external service
 

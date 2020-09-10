@@ -27,15 +27,15 @@ function prettyJSONString(inputString) {
 }
 
 // pre-requisites:
-// - fabric-sample two organization test-network setup with two peers, ordering service,
+// - fabric-sample two organization network setup with two peers, ordering service,
 //   and 2 certificate authorities
-//         ===> from directory /fabric-samples/test-network
+//         ===> from directory /fabric-samples/network
 //         ./network.sh up createChannel -ca
 // - Use any of the asset-transfer-basic chaincodes deployed on the channel "mychannel"
 //   with the chaincode name of "basic". The following deploy command will package,
 //   install, approve, and commit the javascript chaincode, all the actions it takes
 //   to deploy a chaincode to a channel.
-//         ===> from directory /fabric-samples/test-network
+//         ===> from directory /fabric-samples/network
 //         ./network.sh deployCC -ccn basic -ccl javascript
 // - Be sure that node.js is installed
 //         ===> from directory /fabric-samples/asset-transfer-basic/application-javascript

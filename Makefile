@@ -9,6 +9,22 @@ start: .fabric-setup
 stop: 
 	(cd network && ./network.sh down)
 
+.PHONY: deploy-cc
+deploy-cc:
+	(cd network && ./network.sh deployCC -ccn basic -ccl javascript)
+
+.PHONY: invoke-cc
+invoke-cc: .app-setup
+	(cd asset-transfer-basic/application-javascript && node app.js)
+
+.PHONY: clean
+clean: stop
+	rm -rf asset-transfer-basic/application-javascript/wallet
+
 .fabric-setup: 
-	./bootstrap.sh -s -d
+	./bootstrap.sh -d
 	touch .fabric-setup
+
+.app-setup:
+	(cd asset-transfer-basic/application-javascript && npm install)
+	touch .app-setup
