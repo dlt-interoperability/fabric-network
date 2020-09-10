@@ -8,6 +8,7 @@ start: .fabric-setup
 .PHONY: stop
 stop: 
 	(cd network && ./network.sh down)
+	rm -rf asset-transfer-basic/application-javascript/wallet/*
 
 .PHONY: deploy-cc
 deploy-cc:
