@@ -14,7 +14,6 @@ exports.buildCCPOrg1 = () => {
   const ccpPath = path.resolve(
     __dirname,
     "..",
-    "..",
     "network",
     "organizations",
     "peerOrganizations",

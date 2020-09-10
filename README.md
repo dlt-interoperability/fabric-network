@@ -35,6 +35,11 @@ Note that the application is set up to make a `CreateAsset` transaction every
 make stop
 ```
 
+## TODO
+
+- Change the keys added to the ledger to be random numbers so there is no key
+  clash in the accumulator.
+
 ## License <a name="license"></a>
 
 Hyperledger Project source code files are made available under the Apache
