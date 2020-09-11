@@ -19,26 +19,10 @@ It brings up a network with the following components:
 
 ## Quickstart guide
 
-Because the Fabric agent only subscribes to new block events, it is important
-that the Fabric agent is started before the Fabric network first deploys and
-installs its chaincode. Therefore, the order in which these components are
-started matters.
-
-1. Start the Fabric network (in fabric-network)
+Start the Fabric network and deploy and invoke the chaincode with:
 
 ```
 make start
-```
-
-2. Start the Fabric agent (in commitment-agent)
-
-```
-./gradlew run
-```
-
-3. Deploy and invoke the chaincode (in fabric-network)
-
-```
 make deploy-cc
 make invoke-cc
 ```
