@@ -71,6 +71,32 @@ class AssetTransfer extends Contract {
     }
     return JSON.stringify(allResults);
   }
+
+  async GetHistoryForKey(ctx, key) {
+    console.log(`Get history for key ${key}`);
+    let iterator = await ctx.stub.getHistoryForKey(key);
+    let allResults = [];
+    let res = await iterator.next();
+    while (!res.done) {
+      if (res.value && res.value.value.toString()) {
+        let jsonRes = {};
+        console.log(res.value.value.toString("utf8"));
+        jsonRes.txId = res.value.tx_id;
+        jsonRes.timestamp = res.value.timestamp;
+        jsonRes.isDelete = res.value.isDelete;
+        try {
+          jsonRes.value = JSON.parse(res.value.value.toString("utf8"));
+        } catch (err) {
+          console.log(err);
+          jsonRes.value = res.value.value.toString("utf8");
+        }
+        allResults.push(jsonRes);
+      }
+      res = await iterator.next();
+    }
+    iterator.close();
+    return JSON.stringify(allResults);
+  }
 }
 
 module.exports = AssetTransfer;
