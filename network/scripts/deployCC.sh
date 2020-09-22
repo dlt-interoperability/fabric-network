@@ -48,6 +48,8 @@ if [ "$CC_SRC_PATH" = "NA" ]; then
     CC_SRC_PATH="$CC_SRC_PATH/chaincode-javascript/"
   elif [ "$CC_SRC_LANGUAGE" = "typescript" ]; then
     CC_SRC_PATH="$CC_SRC_PATH/chaincode-typescript/"
+  elif [ "$CC_SRC_LANGUAGE" = "go" ]; then
+    CC_SRC_PATH="$CC_SRC_PATH/chaincode-go/"
   fi
 
   # check that the language is available for the sample chaincode

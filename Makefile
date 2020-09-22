@@ -14,6 +14,10 @@ stop:
 deploy-cc:
 	(cd network && ./network.sh deployCC -ccn basic -ccl javascript)
 
+.PHONY: deploy-cc-go
+deploy-cc-go:
+	(cd network && ./network.sh deployCC -ccn basic -ccl go)
+
 .PHONY: invoke-cc
 invoke-cc: .app-setup
 	(cd application && node app.js)

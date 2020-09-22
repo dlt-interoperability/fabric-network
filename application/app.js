@@ -121,9 +121,11 @@ async function main() {
       // Now let's try to submit a transaction.
       // This will be sent to both peers and if both peers endorse the transaction, the endorsed proposal will be sent
       // to the orderer to be committed by each of the peer's to the channel ledger.
-      for (let i = 1; i < 100; i++) {
+      for (let i = 1; i < 10; i++) {
         // await sleep(500);
-        console.log(`\n--> Submit Transaction: CreateAsset for key${i}`);
+        console.log(
+          `Submit Transaction: CreateAsset for key${i} with value: value${i}`,
+        );
         await contract.submitTransaction("CreateAsset", `key${i}`, `value${i}`);
         const result = await contract.submitTransaction("ReadAsset", `key${i}`);
         console.log(`Result: ${result}`);
