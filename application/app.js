@@ -115,8 +115,6 @@ async function main() {
       // This type of transaction would only be run once by an application the first time it was started after it
       // deployed the first time. Any updates to the chaincode deployed later would likely not need to run
       // an "init" type function.
-      console.log("\n--> Submit Transaction: InitLedger");
-      await contract.submitTransaction("InitLedger");
 
       // Now let's try to submit a transaction.
       // This will be sent to both peers and if both peers endorse the transaction, the endorsed proposal will be sent
@@ -124,11 +122,15 @@ async function main() {
       for (let i = 1; i < 10; i++) {
         // await sleep(500);
         console.log(
-          `Submit Transaction: CreateAsset for key${i} with value: value${i}`,
+          `Submit Transaction: CreateAccount for 5447910${i} with value: kgQOaDaZAO${i}`,
         );
-        await contract.submitTransaction("CreateAsset", `key${i}`, `value${i}`);
-        const result = await contract.submitTransaction("ReadAsset", `key${i}`);
-        console.log(`Result: ${result}`);
+        await contract.submitTransaction(
+          "create_account",
+          "5447910${i}",
+          "kgQOaDaZAO${i}",
+          i,
+          i,
+        );
       }
     } catch (error) {
       console.error(`******** FAILED while running the application: ${error}`);
